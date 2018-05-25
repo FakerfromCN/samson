@@ -12,7 +12,8 @@ group :preload do
 
   # AR extensions
   gem 'goldiloader'
-  gem 'kaminari'
+  gem 'pagy'
+  gem 'pagy-extras'
   gem 'audited'
   gem 'soft_deletion'
   gem 'doorkeeper'

@@ -7,7 +7,7 @@ class LocksController < ApplicationController
   before_action :authorize_resource!
 
   def index
-    render json: {locks: Lock.page(page).per(1000)}
+    render json: {locks: pagy(Lock, page: page, items: 1000).last}
   end
 
   def create

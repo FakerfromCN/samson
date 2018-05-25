@@ -30,7 +30,7 @@
         </tbody>
       </table>
 
-      <%= paginate @releases %>
+      <%= paginate @pagy, @releases %>
     <% elsif @project.release_branch.present? %>
       <div class="alert alert-warning">
         <p>No release created from release branch <%= @project.release_branch %>.</p>
