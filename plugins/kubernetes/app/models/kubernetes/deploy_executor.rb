@@ -372,14 +372,17 @@ module Kubernetes
 
     # updates resources via kubernetes api
     def deploy(release_docs)
-      release_docs.each do |release_doc|
+      release_docs.map do |release_doc|
         puts_action "Deploying", release_doc
-        if release_doc.blue_green_color
-          non_service_resources(release_doc).each(&:deploy)
-        else
-          release_doc.deploy
+
+        Thread.new do
+          if release_doc.blue_green_color
+            non_service_resources(release_doc).each(&:deploy)
+          else
+            release_doc.deploy
+          end
         end
-      end
+      end.each(&:join)
     end
 
     def deploy_and_watch(release_docs)
